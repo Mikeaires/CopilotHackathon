@@ -33,7 +33,9 @@ def days():
 #validate phoneNumber with Spanish format, for example +34666777888
 #if phoneNumber is valid return "valid"
 #if phoneNumber is not valid return "invalid"
-#example: http://localhost:3000/phoneNumber?phoneNumber=+34666777888
+#example: http://localhost:3000/phoneNumber?phoneNumber=%2B34666777888
+
+
 
 @app.route('/phoneNumber', methods=['GET'])
 def phoneNumber():
@@ -48,8 +50,31 @@ def phoneNumber():
             return "invalid"
 
 
-# if the url has other methods, return "method not supported"
+#Receive by querystring a parameter called color
+#read colors.json file and return the rgba field
+#get color var from querystring
+#iterate for each color in colors.json to find the color
+#return the code.hex field
+#example: http://localhost:3000/color?color=red
 
+@app.route('/color', methods=['GET'])
+def color():
+    color = request.args.get('color')
+    if color is None:
+        return "color not passed"
+    else:
+        import json
+        with open('colors.json') as json_file:
+            data = json.load(json_file)
+            for p in data['colors']:
+                if p['color'] == color:
+                    return p['code']['hex']
+            return "color not found"
+
+
+
+
+# if the url has other methods, return "method not supported"
 
 @app.errorhandler(404)
 def page_not_found(e):
