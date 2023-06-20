@@ -1,0 +1,16 @@
+INFO:root:server is listening on port 3000
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://localhost:3000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:root:server is listening on port 3000
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 378-074-049
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:19:53] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:19:53] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:20:28] "GET /get?key=hello HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:20:28] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:20:40] "GET /get?key=miguel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:20:40] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:20:43] "GET /get?key=miguel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jun/2023 09:20:43] "GET /favicon.ico HTTP/1.1" 200 -
