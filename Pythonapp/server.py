@@ -17,6 +17,22 @@ def get():
     else:
         return "hello " + key
     
+
+# if the url has other methods, return "method not supported"
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return "method not supported"
+
+
+
+# when server is listening, log "server is listening on port 3000"
+
+if __name__ == '__main__':
+    logging.basicConfig(filename='app.log',level=logging.DEBUG)
+    logging.info('server is listening on port 3000')
+    app.run(host='0.0.0.0', port=3000, debug=False)
+    
 #Calculate days between two dates. receive by query string 2 parameters date1 and date 2 , and calcualte the days that are between those two dates.
 #example: http://localhost:3000/days?date1=2020-01-01&date2=2020-01-10
 
@@ -32,7 +48,7 @@ def days():
 #Receive by querystring a parameter called phoneNumber 
 #validate phoneNumber with Spanish format, for example +34666777888
 #if phoneNumber is valid return "valid"
-#if phoneNumber is not valid return "invalid"
+#if phoneNumber is not valid return "invalid" and encode teh plus sign correctly
 #example: http://localhost:3000/phoneNumber?phoneNumber=%2B34666777888
 
 
@@ -64,27 +80,23 @@ def color():
         return "color not passed"
     else:
         import json
-        with open('colors.json') as json_file:
-            data = json.load(json_file)
-            for p in data['colors']:
-                if p['color'] == color:
-                    return p['code']['hex']
-            return "color not found"
+        try:
+            with open('colors.json') as json_file:
+                data = json.load(json_file)
+                for p in data:
+                    if p['color'] == color:
+                        return p['code']['hex']
+                return "color not found"
+        except:
+            return "error loading colors"
 
 
+#Make a call to the joke api and return a random joke using axios
+#example: http://localhost:3000/joke
+@app.route('/joke', methods=['GET'])
+def joke() -> str:
+    import requests
+    response = requests.get("https://api.chucknorris.io/jokes/random")
+    return response.json()['value']
 
 
-# if the url has other methods, return "method not supported"
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return "method not supported"
-
-
-
-# when server is listening, log "server is listening on port 3000"
-
-if __name__ == '__main__':
-    logging.basicConfig(filename='app.log',level=logging.DEBUG)
-    logging.info('server is listening on port 3000')
-    app.run(host='localhost', port=3000, debug=True)
